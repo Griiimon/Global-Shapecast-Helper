@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://coc1wku4r4jdc"]
+
+[ext_resource type="Script" path="res://shapecast_helper.gd" id="1_h4nj7"]
+
+[node name="Shapecast Helper" type="ShapeCast2D"]
+script = ExtResource("1_h4nj7")

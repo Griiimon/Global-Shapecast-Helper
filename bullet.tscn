@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bewmunf5pu3t2"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_0dd37"]
+[ext_resource type="Script" path="res://shape_drawer.gd" id="1_r62kk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_waqmx"]
+size = Vector2(10, 10)
+
+[node name="Bullet" type="Sprite2D"]
+script = ExtResource("1_0dd37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_waqmx")
+script = ExtResource("1_r62kk")
+color = Color(1, 1, 1, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

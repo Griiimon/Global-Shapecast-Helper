@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3k28eqcpwyvr"]
+
+[ext_resource type="Script" path="res://gun.gd" id="1_h1bfb"]
+[ext_resource type="Script" path="res://shape_drawer.gd" id="2_8h68w"]
+[ext_resource type="PackedScene" uid="uid://bewmunf5pu3t2" path="res://bullet.tscn" id="2_a1q18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyhhc"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebws3"]
+size = Vector2(5, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mp3d6"]
+font_size = 30
+
+[node name="Level" type="Node2D"]
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(88, 320)
+script = ExtResource("1_h1bfb")
+bullet_scene = ExtResource("2_a1q18")
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Gun"]
+color = Color(0.33057, 0.0282386, 0.0823394, 1)
+polygon = PackedVector2Array(-8, 24, -8, -16, 56, -16, 56, -8, 48, -8, 48, 0, 16, 0, 16, 8, 8, 8, 8, 24)
+
+[node name="Muzzle" type="Node2D" parent="Gun"]
+position = Vector2(61, -12)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(440, 96)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_xyhhc")
+script = ExtResource("2_8h68w")
+color = Color(0, 0.913725, 0, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(848, 528)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_xyhhc")
+script = ExtResource("2_8h68w")
+color = Color(0, 0.913725, 0, 1)
+
+[node name="StaticBody2D Thin" type="StaticBody2D" parent="."]
+position = Vector2(544, 312)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D Thin"]
+shape = SubResource("RectangleShape2D_ebws3")
+script = ExtResource("2_8h68w")
+color = Color(0.67451, 0.894118, 0.215686, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Left Mouse Button - Slow
+Right Mouse Button - Fast"
+label_settings = SubResource("LabelSettings_mp3d6")
