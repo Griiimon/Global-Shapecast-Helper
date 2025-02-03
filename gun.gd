@@ -19,5 +19,8 @@ func shoot(speed: float):
 	var bullet: Bullet= bullet_scene.instantiate()
 	bullet.position= muzzle.global_position
 	bullet.rotation= muzzle.global_rotation
-	bullet.speed= speed
+	
+	# set the bullets velocity vector to where the muzzle is pointing
+	# ( global_transform.x means RIGHT ) 
+	bullet.velocity= muzzle.global_transform.x * speed
 	get_tree().current_scene.add_child(bullet)

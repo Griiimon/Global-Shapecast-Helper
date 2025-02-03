@@ -1,24 +1,30 @@
 class_name Bullet
 extends Node2D
 
+const BOUNCE= true
+
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-var speed: float
+var velocity: Vector2
 
 
 
 func _physics_process(delta: float) -> void:
-	# store current position
-	var previous_position: Vector2
-	previous_position= position
+	# calculating the next position of the projectile
+	var next_position: Vector2= position + velocity * delta
 	
-	# move forward
-	position+= transform.x * speed * delta
-	
-	# check if we hit something between our previous 
-	# and current position
-	ShapecastHelper.cast(previous_position, position, collision_shape_2d.shape)
+	# check if we will hit something our current and next position
+	ShapecastHelper.cast(position, next_position, collision_shape_2d.shape)
 	
 	if ShapecastHelper.is_colliding():
-		# and destroy if it collided
-		queue_free()
+		if BOUNCE:
+			# bounce if it collided
+			# take the first collision normal we can get
+			velocity= velocity.bounce(ShapecastHelper.get_collision_normal(0))
+		else:
+			# destroy if it collided
+			queue_free()
+	else:
+		# if there wasn't any collision we can move the bullet
+		# to the next position we previously calculated
+		position= next_position
